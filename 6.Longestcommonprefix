@@ -1,0 +1,41 @@
+fn longestcommonprefix(strs: &[String]) -> String {
+    // check for an empty or single-element input
+    if strs.is_empty()||strs.len()==1 {
+        return "".to_string();
+    }
+
+    // use the first string as the initial prefix
+    let mut prefix = strs[0].chars().collect::<String>();
+
+    // Iterate through remaining strings
+    for string in strs.iter().skip(1) {
+        // Find the shortest common prefix between the current prefix and the string
+        let mut new_prefix =String::new();
+        for (i, (c1, c2)) in prefix.chars().zip(string.chars()).enumerate(){
+            if c1 != c2 {
+                // Characters differ, shorten the prefix and break
+                new_prefix = prefix[..i].to_string();
+                break;
+            }
+            new_prefix.push(c1);
+        }
+
+        // Update the prefix with the shorter one
+        prefix=new_prefix;
+    }
+
+    // Return the final prefix
+    prefix
+}
+
+fn main() {
+    let strs = vec![
+        "steel".to_string(),
+        "steal".to_string(),
+        "steer".to_string(),
+    ];
+
+    let prefix = longestcommonprefix(&strs);
+
+    println!("Longest common prefix of {:?}: {}", strs, prefix);//output is ste
+}
