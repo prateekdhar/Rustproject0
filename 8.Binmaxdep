@@ -1,0 +1,38 @@
+// Define a binary tree enum
+enum TreeNode {
+    Node { val: i32, left: Box<TreeNode>, right: Box<TreeNode> },
+    Leaf { val: i32 },
+}
+
+impl TreeNode {
+    fn new(val: i32) -> Self {
+        TreeNode::Leaf { val }
+    }
+
+    fn with_children(val: i32, left: TreeNode, right: TreeNode) -> Self {
+        TreeNode::Node { val, left: Box::new(left), right: Box::new(right) }
+    }
+}
+
+fn binmaxdep(root: &TreeNode) -> i32 {
+    match root {
+        TreeNode::Leaf { .. } => 1,
+        TreeNode::Node { left, right, .. } => {
+            let left_depth = binmaxdep(left);
+            let right_depth = binmaxdep(right);
+            1 + left_depth.max(right_depth)
+        }
+    }
+}
+
+fn main() {
+    // Example usage
+    let root = TreeNode::with_children(
+        3,
+        TreeNode::new(9),
+        TreeNode::with_children(20, TreeNode::new(15), TreeNode::new(7))
+    );
+
+    let depth = binmaxdep(&root);
+    println!("Maximum depth of the binary tree: {}", depth);
+}
