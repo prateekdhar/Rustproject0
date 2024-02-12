@@ -1,0 +1,14 @@
+fn shortest_word(text: &str) -> Option<&str> {
+    text.split_whitespace()
+        .filter(|word| !word.is_empty()) // Filter out empty words
+        .min_by(|a, b| a.len().cmp(&b.len())) // Find the word with the smallest length
+}
+
+fn main() {
+    let text = "A Sample string";
+
+    match shortest_word(text) {
+        Some(word) => println!("Shortest word: {}", word),
+        None => println!("No words found in the string."),
+    }
+}
