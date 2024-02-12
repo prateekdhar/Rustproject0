@@ -1,0 +1,27 @@
+fn median(arr: &[i32]) -> f64 {
+    // Check for an empty or single-element array
+    if arr.is_empty() || arr.len() == 1 {
+        panic!("median can't be calculated for an empty or single-element array");
+
+    }
+
+    // Calculate the middle index based on array length
+    let middle = arr.len()/2;
+
+    // Handle the even and odd length arrays differently
+    if arr.len()%2==0{
+        // Average of two middle elements for even length
+        (arr[middle-1] as f64 + arr[middle] as f64) /2.0
+    } else {
+        // Middle element for odd length
+        arr[middle] as f64
+    }
+}
+
+fn main() {
+    let arr1 = [1,2,3,4,5];
+    let arr2 = [1,2,3,4];
+
+    println!("the median of {:?}:{}",arr1,median(&arr1));
+    println!("the median of {:?}:{}",arr2,median(&arr2));
+}
