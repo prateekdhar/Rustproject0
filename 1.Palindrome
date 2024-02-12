@@ -1,0 +1,18 @@
+fn is_palindrome(text: &str) -> bool {
+                                           
+        let text_cleaned = text.to_lowercase().chars().filter(|c| c.is_alphanumeric()).collect::<String>(); // convert the string to lowercase and remove non-alphanumeric characters.
+
+    // Check if the reversed string is the same as the original string.
+    text_cleaned == text_cleaned.chars().rev().collect::<String>()
+}
+
+fn main() {
+    let strings = vec![
+        "Malayalam",       // palindrome
+        "hello world", // not a palindrome
+    ];
+
+    for string in strings {
+        println!("{} is {}a palindrome", string, if is_palindrome(string) { "" } else { "not " });
+    }
+}
