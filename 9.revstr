@@ -1,0 +1,10 @@
+fn revstr(s: &str) -> String {
+  s.chars().rev().collect::<String>()
+}
+
+fn main() {
+  let s = "hello world";
+  let reversed = revstr(s);
+  println!("Original: {}", s);
+  println!("Reversed: {}", reversed);
+}
