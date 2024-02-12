@@ -1,0 +1,32 @@
+fn is_prime(n: u64) -> bool {
+    // 1 isn't prime and 2 is just the only even prime
+    if n <=1 {
+        return false;
+    }
+    else if n==2 {
+        return true;
+    }
+    else if n%2==0 {
+        return false;
+    }
+
+    // Check only the odd divisors till the square root of n
+    let mut i = 3;
+    while i*i <= n {
+        if n%i==0 || n%(i+2)==0{
+            return false;
+        }
+        i+=6;
+    }
+
+    // If no divisors found, n is prime
+    true
+}
+
+fn main() {
+    let numbers = [1,2,3,4,5,6,7,8,9,11,13,17,23,56,92,100,103];
+
+    for num in numbers {
+        println!("{} is {}a prime number", num, if is_prime(num) { "" } else { "not " });
+    }
+}
